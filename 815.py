@@ -24,3 +24,24 @@ def numBusesToDestination(self, routes, source: int, target: int) -> int:
 
 print(numBusesToDestination([[1,2,7],[3,6,7]], 1, 19))
 
+
+
+# two sum
+def twosum (nums, target):
+    dic = {}
+    for i in range(len(nums)):
+        if nums[i] in dic:
+            return [dic[nums[i]], i]
+        else:
+            dic[target - nums[i]] = i
+    return []
+
+def bfs(graph, start):
+    visited, queue = set(), [start]
+    while queue:
+        vertex = queue.pop(0)
+        if vertex not in visited:
+            visited.add(vertex)
+            queue.extend(graph[vertex] - visited)
+    return visited
+
