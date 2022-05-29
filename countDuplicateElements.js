@@ -1,6 +1,7 @@
 function countDuplicate(arr) {
   var obj = {};
   var result = [];
+
   for (var i = 0; i < arr.length; i++) {
     if (!obj[arr[i]]) {
       obj[arr[i]] = 1;
@@ -14,7 +15,6 @@ function countDuplicate(arr) {
       result.push(key);
     }
   }
-
   return result.length;
 }
 

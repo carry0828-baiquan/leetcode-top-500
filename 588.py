@@ -47,5 +47,7 @@ obj = FileSystem()
 param_1 = obj.ls("/")
 obj.mkdir("/a")
 obj.addContentToFile("/a/b", "hello")
+obj.find("/a/b")
+
 param_4 = obj.readContentFromFile("/a/b")
 print(param_1)

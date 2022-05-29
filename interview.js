@@ -162,27 +162,26 @@
 //   ])
 // );
 
-// //change [‘a.b.c’, 'd.e.f'] to {a:{b:{c:''}}, d:{e:{f:''}}}
-// function change(arr) {
-//   let result = {};
-//   for (let i = 0; i < arr.length; i++) {
-//     let nameArr = arr[i].split(".");
-//     let curr = result;
-//     for (let j = 0; j < nameArr.length; j++) {
-//       if (j === nameArr.length - 1) {
-//         curr[nameArr[j]] = "";
-//       } else {
-//         if (!(nameArr[j] in curr)) {
-//           curr[nameArr[j]] = {};
-//         }
-//         curr = curr[nameArr[j]];
-//       }
-//     }
-//   }
-//   return result;
-// }
-// console.log(change(["a.b.c", "d.e.f"]));
+//change [‘a.b.c’, 'd.e.f'] to {a:{b:{c:''}}, d:{e:{f:''}}}
 
-//The goal is to have a tree structure where each object(section) contains all its subsections going from 4 to 4.1 > 4.1.1 > 4.1.1.1.
- function tree(arr) {
-   
+function change(arr) {
+  let result = new Map();
+  for (let i = 0; i < arr.length; i++) {
+    let nameArr = arr[i].split(".");
+    console.log(nameArr);
+    let curr = result;
+    for (let j = 0; j < nameArr.length; j++) {
+      if (j === nameArr.length - 1) {
+        curr.set(nameArr[j], "");
+      } else {
+        if (!(nameArr[j] in curr)) {
+          curr.set(nameArr[j], new Map());
+        }
+        curr = curr.get(nameArr[j]);
+      }
+    }
+  }
+  return result;
+}
+
+console.log(change(["a.b.c", "d.e.f"]));
