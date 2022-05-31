@@ -165,19 +165,19 @@
 //change [‘a.b.c’, 'd.e.f'] to {a:{b:{c:''}}, d:{e:{f:''}}}
 
 function change(arr) {
-  let result = new Map();
+  let result = {};
   for (let i = 0; i < arr.length; i++) {
     let nameArr = arr[i].split(".");
-    console.log(nameArr);
+    //console.log(nameArr);
     let curr = result;
     for (let j = 0; j < nameArr.length; j++) {
       if (j === nameArr.length - 1) {
-        curr.set(nameArr[j], "");
+        curr[nameArr[j]] = "";
       } else {
         if (!(nameArr[j] in curr)) {
-          curr.set(nameArr[j], new Map());
+          curr[nameArr[j]] = {};
         }
-        curr = curr.get(nameArr[j]);
+        curr = curr[nameArr[j]];
       }
     }
   }
@@ -185,3 +185,46 @@ function change(arr) {
 }
 
 console.log(change(["a.b.c", "d.e.f"]));
+
+//     div
+//    /    \
+// div     div
+// |          |
+// a          b
+// 变成<div> <div>a</div> <div>b</div> </div>
+//node
+//
+
+let map1 = {
+  product: "3232323",
+  hair: "343232",
+};
+
+let map2 = {
+  3232323: { date: "08-28-1998", price: 23 },
+  3232323: { date: "08-28-1998", price: 23 },
+  3232323: { date: "08-28-1998", price: 23 },
+  343232: { date: "04-28-1998", price: 13 },
+};
+
+let map2Sorted = Object.entries(map2).sort((a, b) => {
+  return a.price - b.price;
+});
+
+console.log(map2Sorted);
+
+function getAvgPrice(product, month) {
+  let barcode = map1[product];
+  console.log(barcode);
+  let sum = 0,
+    count = 0;
+  for (const [k, v] of Object.entries(map2)) {
+    count++;
+    if (k === barcode && v.date.split("-")[0] === month) {
+      sum += v.price;
+    }
+  }
+  return Math.floor(sum / count);
+}
+
+console.log(getAvgPrice("product", "08"));
